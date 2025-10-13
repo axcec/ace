@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prasad's Blog</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-orange-100 text-black font-serif min-h-screen p-6">
+
+  <div class="w-full  max-w-2xl mx-auto grid gap-4">
+    <!-- Heading -->
+    <h1 class="text-4xl">Prasad's Blog</h1>
+
+    <!-- Navigation with underline and bottom border -->
+    <nav class="flex flex-wrap  gap-8 border-b border-black pb-2">
+      <a href="index.html" class="relative after:absolute after:left-0 after:bottom-[-4px] after:h-[2px] after:w-0 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Home</a>
+      <a href="./blogs/blog.html" class="relative after:absolute after:left-0 after:bottom-[-4px] after:h-[2px] after:w-0 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Blogs</a>
+      <a href="./research-notes/research.html" class="relative after:absolute after:left-0 after:bottom-[-4px] after:h-[2px] after:w-0 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Research Notes</a>
+      <a href="./maths/maths.html" class="relative after:absolute after:left-0 after:bottom-[-4px] after:h-[2px] after:w-0 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Maths</a>
+      <a href="./notes/notes.html" class="relative after:absolute after:left-0 after:bottom-[-4px] after:h-[2px] after:w-0 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Notes</a>
+    </nav>
+
+    <!-- Text content -->
+    <div class="text-lg space-y-6 text-left">
+    <p>Hi, I'm <strong>Prasad Firame</strong>, a backend engineer passionate about cloud-native tech, infra/devops, and machine learning.</p>
+    <p>Right now, I'm building and learning around backend systems and devops workflows.</p>
+    <p>Mostly, I’m digging into open-source codebases or coding backend solutions.</p>
+    <p>Feel free to connect via my socials below :)</p>
+    </div>
+    
+     <!-- Neural Network Canvas -->
+    <div class="relative border border-black bg-gray-50 fade-in" style="height: 300px;">
+      <canvas id="neuralCanvas" class="w-full h-full"></canvas>
+     
+    </div>
+    <!-- Top border above socials -->
+    <div class="border-t border-black pt-4">
+      <!-- Socials -->
+      <div class="flex  gap-6 text-black ">
+        <a href="https://x.com/FireD_Ace18" class="hover:underline">Twitter</a>
+        <a href="https://github.com/prasad-1803" class="hover:underline">Github</a>
+        <a href="https://www.linkedin.com/in/prasad-firame-636a9a227/" class="hover:underline">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  const canvas = document.getElementById('neuralCanvas');
+  const ctx = canvas.getContext('2d');
+
+  let w, h;
+  function resize() {
+    w = canvas.width = canvas.offsetWidth;
+    h = canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const nodes = [];
+  const nodeCount = 50;
+  const connectionDistance = 160;
+  const mouse = { x: w / 2, y: h / 2, radius: 120 };
+
+  class Node {
+    constructor() {
+      this.x = Math.random() * w;
+      this.y = Math.random() * h;
+      this.vx = (Math.random() - 0.5) * 0.3;
+      this.vy = (Math.random() - 0.5) * 0.3;
+      this.radius = Math.random() * 2 + 1.5;
+      this.pulse = Math.random() * Math.PI * 2;
+    }
+
+    update() {
+      const dx = mouse.x - this.x;
+      const dy = mouse.y - this.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+
+      if (dist < mouse.radius) {
+        const force = (mouse.radius - dist) / mouse.radius;
+        this.vx += (dx / dist) * force * 0.05;
+        this.vy += (dy / dist) * force * 0.05;
+      }
+
+      this.x += this.vx;
+      this.y += this.vy;
+
+      if (this.x < 0 || this.x > w) this.vx *= -1;
+      if (this.y < 0 || this.y > h) this.vy *= -1;
+
+      this.x = Math.max(0, Math.min(w, this.x));
+      this.y = Math.max(0, Math.min(h, this.y));
+
+      this.vx *= 0.97;
+      this.vy *= 0.97;
+
+      this.pulse += 0.04;
+    }
+
+    draw() {
+      const pulseSize = Math.sin(this.pulse) * 0.4 + 1.1;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius * pulseSize, 0, Math.PI * 2);
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = 'rgba(0,0,0,0.8)';
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.85)';
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+  }
+
+  for (let i = 0; i < nodeCount; i++) {
+    nodes.push(new Node());
+  }
+
+  canvas.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
+  });
+
+  canvas.addEventListener('mouseleave', () => {
+    mouse.x = w / 2;
+    mouse.y = h / 2;
+  });
+
+  function drawConnections() {
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < connectionDistance) {
+          const opacity = (1 - dist / connectionDistance) * 0.3;
+          const grad = ctx.createLinearGradient(nodes[i].x, nodes[i].y, nodes[j].x, nodes[j].y);
+          grad.addColorStop(0, `rgba(0,0,0,${opacity})`);
+          grad.addColorStop(1, `rgba(0,0,0,${opacity * 0.8})`);
+
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.strokeStyle = grad;
+          ctx.lineWidth = (1 - dist / connectionDistance) * 1.2;
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function animate() {
+    // Faint background trail (for motion blur)
+    ctx.fillStyle = 'rgba(253, 246, 227, 0.3)'; // Matches bg-[#fdf6e3]
+    ctx.fillRect(0, 0, w, h);
+
+    drawConnections();
+    nodes.forEach((node) => {
+      node.update();
+      node.draw();
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+</script>
+
+
+</body>
+</html>
