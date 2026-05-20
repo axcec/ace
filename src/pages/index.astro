@@ -4,29 +4,19 @@ import { getCollection } from "astro:content";
 
 const posts = await getCollection("blog");
 
-// sort latest first
 posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-// take only first 2
 const latestPosts = posts.slice(0, 2);
 ---
 
 <Layout title="Home">
 
-  <!-- ═══════════════════════════════════════════
-       EFFECT 7: FALLING KANJI CANVAS (background)
-  ════════════════════════════════════════════ -->
   <canvas id="kanji-rain"></canvas>
 
-  <!-- ═══════════════════════════════════════════
-       EFFECT 2: INK CURSOR TRAIL CANVAS
-  ════════════════════════════════════════════ -->
   <canvas id="ink-trail"></canvas>
 
-  <!-- MAIN CONTENT -->
   <div id="main-content">
 
-    <!-- EFFECT 4: Glitch text on name -->
     <h1 style="font-size: 1.8rem;">
       <span id="glitch-name" data-text="Prasad Firame">Prasad Firame</span>
       <span class="cursor">_</span>
@@ -49,10 +39,8 @@ const latestPosts = posts.slice(0, 2);
       them into code, writing, and experiments.
     </p>
 
-    <!-- IMAGE + QUOTES -->
     <div class="image-wrapper">
 
-      <!-- EFFECT 6: Brush stroke underline on quote -->
       <p class="vagabond-quote top">
         &gt; Welcome to my domain,<br/>
         &gt; Throughout heaven and earth, I alone am the honored one..
@@ -71,7 +59,6 @@ const latestPosts = posts.slice(0, 2);
 
     </div>
 
-    <!-- AUDIO -->
     <audio id="bgMusic" loop>
       <source src="/mp3/ninjabg.mp3" type="audio/mpeg" />
     </audio>
@@ -81,8 +68,6 @@ const latestPosts = posts.slice(0, 2);
       <a href="/origin-story" class="slash-link hover-sound">here</a>
     </p>
 
-    <!-- WRITE UPS -->
-    <!-- EFFECT 6: brush stroke on section heading -->
     <p style="margin-top:2rem; font-size:0.95rem;" class="post-date brush-reveal">
       write-ups
     </p>
@@ -101,7 +86,6 @@ const latestPosts = posts.slice(0, 2);
       </p>
     ))}
 
-    <!-- NAVIGATION -->
     {posts.length > 2 && (
       <div
         style="
@@ -122,7 +106,6 @@ const latestPosts = posts.slice(0, 2);
       </div>
     )}
 
-    <!-- FOOTER -->
     <p style="margin-top:2rem;">
       <a href="https://x.com/rev_proxy" class="slash-link hover-sound">x/twitter</a>
       ·
@@ -133,18 +116,12 @@ const latestPosts = posts.slice(0, 2);
       <a href="/resume.pdf" target="_blank" class="hover-sound">📄 CV</a>
     </p>
 
-  </div><!-- /main-content -->
+  </div>
 
 </Layout>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     ALL ANIME EFFECTS SCRIPT
-════════════════════════════════════════════════════════════════ -->
 <script is:inline>
 
-/* ─────────────────────────────────────────────
-   EFFECT 7: FALLING KANJI RAIN
-───────────────────────────────────────────── */
 (function kanjiRain() {
   const canvas  = document.getElementById("kanji-rain");
   const ctx     = canvas.getContext("2d");
@@ -180,16 +157,13 @@ const latestPosts = posts.slice(0, 2);
   setInterval(draw, 55);
 })();
 
-
-/* ─────────────────────────────────────────────
-   EFFECT 2: INK SPLATTER CURSOR TRAIL
-───────────────────────────────────────────── */
 (function inkTrail() {
   const canvas = document.getElementById("ink-trail");
   const ctx    = canvas.getContext("2d");
 
   canvas.width  = window.innerWidth;
   canvas.height = window.innerHeight;
+
   window.addEventListener("resize", () => {
     canvas.width  = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -199,6 +173,7 @@ const latestPosts = posts.slice(0, 2);
 
   window.addEventListener("mousemove", (e) => {
     const count = 2 + Math.floor(Math.random() * 2);
+
     for (let i = 0; i < count; i++) {
       particles.push({
         x:     e.clientX + (Math.random() - 0.5) * 10,
@@ -218,11 +193,15 @@ const latestPosts = posts.slice(0, 2);
 
     for (let i = particles.length - 1; i >= 0; i--) {
       const p = particles[i];
-      p.x    += p.vx;
-      p.y    += p.vy;
+
+      p.x += p.vx;
+      p.y += p.vy;
       p.life -= p.decay;
 
-      if (p.life <= 0) { particles.splice(i, 1); continue; }
+      if (p.life <= 0) {
+        particles.splice(i, 1);
+        continue;
+      }
 
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
@@ -236,19 +215,18 @@ const latestPosts = posts.slice(0, 2);
   animate();
 })();
 
-
-/* ─────────────────────────────────────────────
-   EFFECT 4: GLITCH TEXT ON NAME
-───────────────────────────────────────────── */
 (function glitchName() {
-  const el      = document.getElementById("glitch-name");
-  const original= el.dataset.text;
-  const chars   = "斬道侍刀ア#@!%イウエオABCDEF0123456789";
-  let   timer   = null;
+  const el       = document.getElementById("glitch-name");
+  const original = el.dataset.text;
+  const chars    = "斬道侍刀ア#@!%イウエオABCDEF0123456789";
+
+  let timer = null;
 
   function glitch() {
     let iterations = 0;
+
     clearInterval(timer);
+
     timer = setInterval(() => {
       el.textContent = original
         .split("")
@@ -260,6 +238,7 @@ const latestPosts = posts.slice(0, 2);
         .join("");
 
       iterations += 0.4;
+
       if (iterations >= original.length) {
         el.textContent = original;
         clearInterval(timer);
@@ -269,14 +248,9 @@ const latestPosts = posts.slice(0, 2);
 
   el.addEventListener("mouseenter", glitch);
 
-  // auto-glitch once on load
   setTimeout(glitch, 800);
 })();
 
-
-/* ─────────────────────────────────────────────
-   EFFECT 6: BRUSH STROKE SCROLL REVEAL
-───────────────────────────────────────────── */
 (function brushReveal() {
   const targets = document.querySelectorAll(".brush-reveal");
 
@@ -292,21 +266,21 @@ const latestPosts = posts.slice(0, 2);
   targets.forEach(t => observer.observe(t));
 })();
 
-
-/* ─────────────────────────────────────────────
-   EFFECT 1: KATANA SLASH PAGE TRANSITION
-───────────────────────────────────────────── */
 (function katanaSlash() {
   const slash = document.createElement("div");
+
   slash.id = "katana-slash";
+
   document.body.appendChild(slash);
 
   document.querySelectorAll("a.slash-link").forEach(link => {
     link.addEventListener("click", (e) => {
       const href = link.getAttribute("href");
+
       if (!href || href.startsWith("mailto") || href.startsWith("http")) return;
 
       e.preventDefault();
+
       slash.classList.add("slash-active");
 
       setTimeout(() => {
@@ -316,15 +290,12 @@ const latestPosts = posts.slice(0, 2);
   });
 })();
 
-
-/* ─────────────────────────────────────────────
-   EFFECT 3: SAKURA / ASH PETALS (grayscale)
-───────────────────────────────────────────── */
 (function ashPetals() {
   const count = 18;
 
   for (let i = 0; i < count; i++) {
     const petal = document.createElement("div");
+
     petal.className = "ash-petal";
 
     const size  = 4 + Math.random() * 7;
@@ -346,45 +317,41 @@ const latestPosts = posts.slice(0, 2);
   }
 })();
 
-
-/* ─────────────────────────────────────────────
-   EFFECT 17: SWORD SHEATH HOVER SOUND
-   Synthesised via Web Audio — no file needed
-───────────────────────────────────────────── */
 (function hoverSound() {
   const AC = window.AudioContext || window.webkitAudioContext;
+
   if (!AC) return;
+
   let ctx;
 
   function playSwish() {
-    // lazy-init AudioContext on first interaction (browser policy)
     if (!ctx) ctx = new AC();
 
     const sampleRate = ctx.sampleRate;
-    const duration   = 0.18; // seconds
-    const buf        = ctx.createBuffer(1, sampleRate * duration, sampleRate);
-    const data       = buf.getChannelData(0);
+    const duration   = 0.18;
 
-    // white noise shaped with fast exponential decay → breathy swish
+    const buf  = ctx.createBuffer(1, sampleRate * duration, sampleRate);
+    const data = buf.getChannelData(0);
+
     for (let i = 0; i < data.length; i++) {
-      const t  = i / sampleRate;
-      data[i]  = (Math.random() * 2 - 1) * Math.exp(-t * 28) * 0.22;
+      const t = i / sampleRate;
+      data[i] = (Math.random() * 2 - 1) * Math.exp(-t * 28) * 0.22;
     }
 
-    const src    = ctx.createBufferSource();
-    src.buffer   = buf;
+    const src = ctx.createBufferSource();
+    src.buffer = buf;
 
-    // highpass filter strips low rumble, keeps only the "shk" texture
     const filter = ctx.createBiquadFilter();
-    filter.type  = "highpass";
+    filter.type = "highpass";
     filter.frequency.value = 800;
 
-    const gain   = ctx.createGain();
+    const gain = ctx.createGain();
     gain.gain.value = 0.4;
 
     src.connect(filter);
     filter.connect(gain);
     gain.connect(ctx.destination);
+
     src.start();
   }
 
@@ -393,84 +360,77 @@ const latestPosts = posts.slice(0, 2);
   });
 })();
 
-
-/* ─────────────────────────────────────────────
-   MUSIC — scroll + click fallback
-───────────────────────────────────────────── */
 (function music() {
   const image = document.getElementById("musashi-image");
   const audio = document.getElementById("bgMusic");
-  let   played = false;
+
+  let playing = false;
 
   const hint = document.createElement("p");
-  hint.id    = "music-hint";
-  hint.textContent = "[ click image to enable music ]";
+
+  hint.id = "music-hint";
+  hint.textContent = "[ click image to play music ]";
+
   hint.style.cssText =
     "text-align:center;font-size:0.75rem;color:#71717a;margin-top:0.4rem;opacity:0.7;cursor:pointer;";
+
   image.parentNode.insertBefore(hint, image.nextSibling);
 
-  function tryPlay() {
-    if (!played) {
-      audio.play()
-        .then(() => {
-          played = true;
-          const h = document.getElementById("music-hint");
-          if (h) h.style.display = "none";
-        })
-        .catch(() => {});
+  image.addEventListener("click", async () => {
+    try {
+      if (!playing) {
+        await audio.play();
+        playing = true;
+        hint.textContent = "[ click image to stop music ]";
+      } else {
+        audio.pause();
+        audio.currentTime = 0;
+        playing = false;
+        hint.textContent = "[ click image to play music ]";
+      }
+    } catch (err) {
+      console.error(err);
     }
-  }
-
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) tryPlay(); });
-  }, { threshold: 0.6 });
-
-  obs.observe(image);
-  image.addEventListener("click", tryPlay);
-  document.addEventListener("click", tryPlay, { once: true });
+  });
 })();
 
 </script>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     STYLES
-════════════════════════════════════════════════════════════════ -->
 <style>
 
-/* ── KANJI RAIN CANVAS ── */
 #kanji-rain {
   position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   pointer-events: none;
   z-index: 0;
   opacity: 0.55;
 }
 
-/* ── INK TRAIL CANVAS ── */
 #ink-trail {
   position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   pointer-events: none;
   z-index: 9999;
 }
 
-/* ── MAIN CONTENT above canvases ── */
 #main-content {
   position: relative;
   z-index: 10;
 }
 
-/* ══════════════════════════════════
-   EFFECT 1: KATANA SLASH TRANSITION
-══════════════════════════════════ */
 #katana-slash {
   position: fixed;
   top: -10%;
   left: -5%;
   width: 8px;
   height: 120vh;
+
   background: linear-gradient(
     to bottom,
     transparent 0%,
@@ -479,7 +439,9 @@ const latestPosts = posts.slice(0, 2);
     rgba(255,255,255,0.0) 90%,
     transparent 100%
   );
+
   transform: rotate(15deg) translateX(-100px);
+
   pointer-events: none;
   z-index: 99998;
   opacity: 0;
@@ -491,16 +453,32 @@ const latestPosts = posts.slice(0, 2);
 }
 
 @keyframes katana-strike {
-  0%   { opacity: 0;   transform: rotate(15deg) translateX(-100px); }
-  15%  { opacity: 1;   transform: rotate(15deg) translateX(10vw); }
-  40%  { opacity: 1;   transform: rotate(15deg) translateX(50vw); }
-  70%  { opacity: 0.6; transform: rotate(15deg) translateX(100vw); }
-  100% { opacity: 0;   transform: rotate(15deg) translateX(120vw); }
+  0% {
+    opacity: 0;
+    transform: rotate(15deg) translateX(-100px);
+  }
+
+  15% {
+    opacity: 1;
+    transform: rotate(15deg) translateX(10vw);
+  }
+
+  40% {
+    opacity: 1;
+    transform: rotate(15deg) translateX(50vw);
+  }
+
+  70% {
+    opacity: 0.6;
+    transform: rotate(15deg) translateX(100vw);
+  }
+
+  100% {
+    opacity: 0;
+    transform: rotate(15deg) translateX(120vw);
+  }
 }
 
-/* ══════════════════════════════════
-   EFFECT 3: ASH PETALS
-══════════════════════════════════ */
 .ash-petal {
   position: fixed;
   top: -20px;
@@ -513,13 +491,20 @@ const latestPosts = posts.slice(0, 2);
 }
 
 @keyframes petal-fall {
-  0%   {
+  0% {
     top: -20px;
     transform: translateX(0) rotate(0deg);
     opacity: 0;
   }
-  5%   { opacity: 1; }
-  90%  { opacity: 0.4; }
+
+  5% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 0.4;
+  }
+
   100% {
     top: 100vh;
     transform: translateX(var(--drift)) rotate(540deg);
@@ -527,9 +512,6 @@ const latestPosts = posts.slice(0, 2);
   }
 }
 
-/* ══════════════════════════════════
-   EFFECT 4: GLITCH NAME
-══════════════════════════════════ */
 #glitch-name {
   cursor: default;
   display: inline-block;
@@ -542,9 +524,6 @@ const latestPosts = posts.slice(0, 2);
    -2px 0 rgba(50,200,255,0.3);
 }
 
-/* ══════════════════════════════════
-   EFFECT 6: BRUSH STROKE REVEAL
-══════════════════════════════════ */
 .brush-reveal {
   position: relative;
   display: inline-block;
@@ -557,6 +536,7 @@ const latestPosts = posts.slice(0, 2);
   left: 0;
   height: 2px;
   width: 0%;
+
   background: linear-gradient(
     to right,
     transparent,
@@ -565,8 +545,11 @@ const latestPosts = posts.slice(0, 2);
     rgba(160,140,100,0.7) 80%,
     transparent
   );
+
   border-radius: 2px;
+
   transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+
   filter: blur(0.5px);
 }
 
@@ -574,9 +557,6 @@ const latestPosts = posts.slice(0, 2);
   width: 100%;
 }
 
-/* ══════════════════════════════════
-   ORIGINAL STYLES
-══════════════════════════════════ */
 .image-wrapper {
   width: 82%;
   margin: 2rem auto;
@@ -592,7 +572,10 @@ const latestPosts = posts.slice(0, 2);
   cursor: pointer;
 
   filter: grayscale(100%) contrast(115%) brightness(0.92);
-  transition: transform 0.25s ease, opacity 0.25s ease;
+
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
 }
 
 .hero-image:hover {
@@ -609,7 +592,12 @@ const latestPosts = posts.slice(0, 2);
   line-height: 1.5;
 }
 
-.vagabond-quote.top  { text-align: left; }
-.vagabond-quote.bottom { text-align: right; }
+.vagabond-quote.top {
+  text-align: left;
+}
+
+.vagabond-quote.bottom {
+  text-align: right;
+}
 
 </style>
