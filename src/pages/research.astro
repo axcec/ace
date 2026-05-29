@@ -6,80 +6,142 @@ import Layout from "../layouts/Layout.astro";
 
   <h1>Research & Experiments</h1>
 
-  <p style="opacity: 0.8; max-width: 700px;">
-    A collection of my research paper implementations, experiments, and system explorations.
-    I focus on understanding core ideas by rebuilding and testing them in code.
+  <p style="opacity: 0.8; max-width: 750px;">
+    I explore AI, machine learning, and distributed systems by rebuilding core research papers and systems from scratch.
+    The goal is not just to use libraries, but to understand how real systems behave under the hood.
   </p>
 
-  <!-- SECTION 1 -->
+  <!-- ========================= -->
+  <!-- AI / ML PAPERS -->
+  <!-- ========================= -->
+
   <section style="margin-top: 40px;">
-    <h2>Paper Implementations</h2>
+    <h2>AI / ML Core Papers</h2>
 
     <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 16px;">
 
       <div style="padding: 16px; border: 1px solid #222; border-radius: 10px;">
         <h3>Attention Is All You Need (Transformer)</h3>
-        <p style="opacity: 0.8;">
-          Implemented scaled dot-product attention and multi-head intuition to understand transformer architecture.
-        </p>
-        <a href="https://github.com/" target="_blank">GitHub Repo</a>
+        <p>Rebuilt scaled dot-product attention and multi-head mechanism to understand token interactions and context learning.</p>
+        <a href="https://github.com/yourusername/transformer" target="_blank">GitHub</a>
       </div>
 
       <div style="padding: 16px; border: 1px solid #222; border-radius: 10px;">
-        <h3>CLIP Embeddings (Vision + Language)</h3>
-        <p style="opacity: 0.8;">
-          Built embedding alignment experiments using cosine similarity for image-text retrieval systems.
-        </p>
-        <a href="https://github.com/" target="_blank">GitHub Repo</a>
+        <h3>BERT: Masked Language Modeling</h3>
+        <p>Implemented masked language modeling to understand bidirectional context learning in transformer models.</p>
+        <a href="https://github.com/yourusername/bert-mlm" target="_blank">GitHub</a>
+      </div>
+
+      <div style="padding: 16px; border: 1px solid #222; border-radius: 10px;">
+        <h3>CLIP (Vision + Language Alignment)</h3>
+        <p>Built contrastive learning pipeline for aligning image and text embeddings into a shared semantic space.</p>
+        <a href="https://github.com/yourusername/clip-experiments" target="_blank">GitHub</a>
+      </div>
+
+      <div style="padding: 16px; border: 1px solid #222; border-radius: 10px;">
+        <h3>Batch Normalization</h3>
+        <p>Reimplemented normalization layers to understand training stability in deep neural networks.</p>
+        <a href="https://github.com/yourusername/batchnorm" target="_blank">GitHub</a>
       </div>
 
     </div>
   </section>
 
-  <!-- SECTION 2 -->
+  <!-- ========================= -->
+  <!-- RETRIEVAL SYSTEMS -->
+  <!-- ========================= -->
+
   <section style="margin-top: 50px;">
-    <h2>Experiments</h2>
+    <h2>Retrieval & Search Systems</h2>
 
     <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 16px;">
 
       <div style="padding: 16px; border: 1px solid #222; border-radius: 10px;">
-        <h3>Vector Search Playground</h3>
-        <p style="opacity: 0.8;">
-          Tested FAISS / ChromaDB-style retrieval for semantic search over embeddings.
-        </p>
-        <img 
-          src="https://placehold.co/800x400" 
-          style="width: 100%; margin-top: 10px; border-radius: 8px;" 
-        />
-        <a href="https://github.com/" target="_blank">GitHub Repo</a>
-      </div>
-
-      <div style="padding: 16px; border: 1px solid #222; border-radius: 10px;">
-        <h3>OCR + Frame Extraction</h3>
-        <p style="opacity: 0.8;">
-          Extracted video frames and tested OCR + captioning pipelines for video understanding systems.
-        </p>
-        <img 
-          src="https://placehold.co/800x400" 
-          style="width: 100%; margin-top: 10px; border-radius: 8px;" 
-        />
-        <a href="https://github.com/" target="_blank">GitHub Repo</a>
+        <h3>FAISS / Vector Search Engine</h3>
+        <p>Built approximate nearest neighbor search system for high-dimensional embeddings and semantic retrieval.</p>
+        <img src="https://placehold.co/900x400" style="width:100%; border-radius:8px; margin-top:10px;" />
+        <a href="https://github.com/yourusername/vector-search" target="_blank">GitHub</a>
       </div>
 
     </div>
   </section>
 
-  <!-- SECTION 3 -->
+  <!-- ========================= -->
+  <!-- DISTRIBUTED SYSTEMS -->
+  <!-- ========================= -->
+
   <section style="margin-top: 50px;">
-    <h2>GitHub</h2>
+    <h2>Distributed Systems (Go / Java)</h2>
 
-    <p style="opacity: 0.8;">
-      Most of my experiments and implementations are available on GitHub.
-    </p>
+    <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 16px;">
 
-    <a href="https://github.com/yourusername" target="_blank">
-      → github.com/yourusername
-    </a>
+      <div style="padding: 16px; border: 1px solid #222; border-radius: 10px;">
+        <h3>MapReduce (Google Paper)</h3>
+        <p>Reimplemented simplified MapReduce pipeline using Go routines to simulate distributed computation.</p>
+        <p style="opacity: 0.7;">Go: goroutines, worker pools, channel-based reducers</p>
+        <a href="https://github.com/yourusername/mapreduce-go" target="_blank">GitHub</a>
+      </div>
+
+      <div style="padding: 16px; border: 1px solid #222; border-radius: 10px;">
+        <h3>Raft Consensus Algorithm</h3>
+        <p>Simulated leader election, log replication, and fault-tolerant distributed state machine.</p>
+        <p style="opacity: 0.7;">Go / Java: concurrency, state machines, election timers</p>
+        <a href="https://github.com/yourusername/raft" target="_blank">GitHub</a>
+      </div>
+
+      <div style="padding: 16px; border: 1px solid #222; border-radius: 10px;">
+        <h3>Kafka-style Event Log System</h3>
+        <p>Built append-only log system to understand streaming architecture and durability guarantees.</p>
+        <p style="opacity: 0.7;">Go: producers, consumers, persistent logs</p>
+        <a href="https://github.com/yourusername/event-log" target="_blank">GitHub</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================= -->
+  <!-- SYSTEM DESIGN CORE -->
+  <!-- ========================= -->
+
+  <section style="margin-top: 50px;">
+    <h2>Systems & Storage Engines</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 16px;">
+
+      <div style="padding: 16px; border: 1px solid #222; border-radius: 10px;">
+        <h3>LSM Tree (Storage Engine)</h3>
+        <p>Implemented log-structured merge tree to understand write-heavy database design (LevelDB-style systems).</p>
+        <a href="https://github.com/yourusername/lsm-tree" target="_blank">GitHub</a>
+      </div>
+
+      <div style="padding: 16px; border: 1px solid #222; border-radius: 10px;">
+        <h3>In-Memory KV Store (Redis-like)</h3>
+        <p>Built key-value store with TTL, caching, and eviction policies for understanding backend systems.</p>
+        <p style="opacity: 0.7;">Java: concurrency, caching, thread-safe storage</p>
+        <a href="https://github.com/yourusername/kv-store" target="_blank">GitHub</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================= -->
+  <!-- EXPERIMENTS -->
+  <!-- ========================= -->
+
+  <section style="margin-top: 50px;">
+    <h2>Experiments</h2>
+
+    <div style="padding: 16px; border: 1px solid #222; border-radius: 10px;">
+      <h3>OCR + Video Frame Intelligence (FrameIQ)</h3>
+      <p>
+        Extracted video frames and built OCR + captioning pipeline to enable interaction with video content.
+      </p>
+
+      <img src="https://placehold.co/900x400" style="width:100%; border-radius:8px; margin-top:10px;" />
+
+      <a href="https://github.com/yourusername/frameiq" target="_blank">GitHub</a>
+    </div>
+
   </section>
 
 </Layout>
