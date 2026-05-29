@@ -1,0 +1,113 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Bucket List">
+
+  <div id="main-content">
+
+    <h1>bucket list</h1>
+
+    <p class="post-date">
+      things I want to do in my lifetime
+    </p>
+
+    <div class="bucket-box">
+
+      <label class="bucket-item">
+        <input type="checkbox" />
+        Visit Luxembourg
+      </label>
+
+      <label class="bucket-item">
+        <input type="checkbox" />
+        Read 25 books
+      </label>
+
+      <label class="bucket-item">
+        <input type="checkbox" />
+        Work in a startup
+      </label>
+
+      <label class="bucket-item">
+        <input type="checkbox" />
+        Live in Istanbul
+      </label>
+
+      <label class="bucket-item">
+        <input type="checkbox" />
+        Travel to New Zealand & Antarctica
+      </label>
+
+      <label class="bucket-item">
+        <input type="checkbox" />
+        Found my own startup
+      </label>
+
+      <label class="bucket-item">
+        <input type="checkbox" />
+        Win 10 hackathons
+      </label>
+
+      <label class="bucket-item">
+        <input type="checkbox" />
+        Join a FAANG or equivalent company
+      </label>
+
+      <label class="bucket-item">
+        <input type="checkbox" />
+        Travel Europe (multiple countries)
+      </label>
+
+      <label class="bucket-item">
+        <input type="checkbox" />
+        Visit New York
+      </label>
+
+      <label class="bucket-item">
+        <input type="checkbox" />
+        Travel Australia
+      </label>
+
+    </div>
+
+  </div>
+
+</Layout>
+
+<style>
+
+#main-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.bucket-box {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bucket-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.bucket-item:hover {
+  transform: translateX(3px);
+  background: rgba(255,255,255,0.03);
+}
+
+.bucket-item input {
+  accent-color: #a8a29e;
+  transform: scale(1.1);
+}
+
+</style>
