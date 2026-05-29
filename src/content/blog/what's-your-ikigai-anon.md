@@ -1,6 +1,6 @@
 ---
 title: "what's your ikigai anon ?"
-date: 2025-05-29
+date: 2026-05-29
 ---
 
 # what’s your ikigai anon ?

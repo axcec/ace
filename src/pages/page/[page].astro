@@ -3,7 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-  const PAGE_SIZE = 2; // ✅ MOVE HERE (fixes runtime scope issue)
+  const PAGE_SIZE = 20; // ✅ MOVE HERE (fixes runtime scope issue)
 
   const posts = await getCollection("blog");
 
@@ -25,7 +25,7 @@ export async function getStaticPaths() {
 
 const { posts, page, totalPages } = Astro.props;
 
-const PAGE_SIZE = 2; // (safe to repeat here too)
+const PAGE_SIZE = 20; // (safe to repeat here too)
 
 const start = (page - 1) * PAGE_SIZE;
 const paginatedPosts = posts.slice(start, start + PAGE_SIZE);
