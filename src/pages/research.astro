@@ -1,0 +1,85 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Research">
+
+  <h1>Research & Experiments</h1>
+
+  <p style="opacity: 0.8; max-width: 700px;">
+    A collection of my research paper implementations, experiments, and system explorations.
+    I focus on understanding core ideas by rebuilding and testing them in code.
+  </p>
+
+  <!-- SECTION 1 -->
+  <section style="margin-top: 40px;">
+    <h2>Paper Implementations</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 16px;">
+
+      <div style="padding: 16px; border: 1px solid #222; border-radius: 10px;">
+        <h3>Attention Is All You Need (Transformer)</h3>
+        <p style="opacity: 0.8;">
+          Implemented scaled dot-product attention and multi-head intuition to understand transformer architecture.
+        </p>
+        <a href="https://github.com/" target="_blank">GitHub Repo</a>
+      </div>
+
+      <div style="padding: 16px; border: 1px solid #222; border-radius: 10px;">
+        <h3>CLIP Embeddings (Vision + Language)</h3>
+        <p style="opacity: 0.8;">
+          Built embedding alignment experiments using cosine similarity for image-text retrieval systems.
+        </p>
+        <a href="https://github.com/" target="_blank">GitHub Repo</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section style="margin-top: 50px;">
+    <h2>Experiments</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 16px;">
+
+      <div style="padding: 16px; border: 1px solid #222; border-radius: 10px;">
+        <h3>Vector Search Playground</h3>
+        <p style="opacity: 0.8;">
+          Tested FAISS / ChromaDB-style retrieval for semantic search over embeddings.
+        </p>
+        <img 
+          src="https://placehold.co/800x400" 
+          style="width: 100%; margin-top: 10px; border-radius: 8px;" 
+        />
+        <a href="https://github.com/" target="_blank">GitHub Repo</a>
+      </div>
+
+      <div style="padding: 16px; border: 1px solid #222; border-radius: 10px;">
+        <h3>OCR + Frame Extraction</h3>
+        <p style="opacity: 0.8;">
+          Extracted video frames and tested OCR + captioning pipelines for video understanding systems.
+        </p>
+        <img 
+          src="https://placehold.co/800x400" 
+          style="width: 100%; margin-top: 10px; border-radius: 8px;" 
+        />
+        <a href="https://github.com/" target="_blank">GitHub Repo</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 3 -->
+  <section style="margin-top: 50px;">
+    <h2>GitHub</h2>
+
+    <p style="opacity: 0.8;">
+      Most of my experiments and implementations are available on GitHub.
+    </p>
+
+    <a href="https://github.com/yourusername" target="_blank">
+      → github.com/yourusername
+    </a>
+  </section>
+
+</Layout>
