@@ -1,0 +1,67 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Quotes">
+
+  <div id="main-content">
+
+    <h1>quotes</h1>
+
+    <p class="post-date">things I keep coming back to</p>
+
+    <div class="quote-grid">
+
+      <div class="quote-card">
+        <p>“All truly strong people are kind.”</p>
+        <span>— Vagabond</span>
+      </div>
+
+      <div class="quote-card">
+        <p>“The impediment to action advances action.”</p>
+        <span>— Marcus Aurelius</span>
+      </div>
+
+      <div class="quote-card">
+        <p>“Simplicity is the ultimate sophistication.”</p>
+        <span>— Leonardo da Vinci</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</Layout>
+
+<style>
+
+#main-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.quote-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.quote-card {
+  padding: 1rem;
+  border-left: 2px solid rgba(180,160,120,0.5);
+  background: rgba(255,255,255,0.02);
+}
+
+.quote-card p {
+  margin: 0;
+  font-style: italic;
+}
+
+.quote-card span {
+  font-size: 0.8rem;
+  color: #71717a;
+  display: block;
+  margin-top: 0.5rem;
+}
+
+</style>
