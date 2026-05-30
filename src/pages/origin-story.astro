@@ -1,36 +1,26 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-const birthDate = new Date("2003-03-18T00:00:00");
-const now = new Date();
-
-const diff = now.getTime() - birthDate.getTime();
-const age = diff / (1000 * 60 * 60 * 24 * 365.2425);
-
-const liveAge = Math.round(age * 10) / 10;
 ---
 
 <Layout title="Origin Story">
   <h1>Origin Story</h1>
 
-  <p>
-    I was born on <strong>18/03/2003</strong> (currently <strong>{liveAge} years old</strong>), in a remote village where exposure to technology was minimal. My early curiosity came not from computers, but from movies like Iron Man, Transformers, and Nolan films ,stories that made me imagine systems bigger than reality.
-  </p>
+  <p> I grew up in a small village where technology wasn't really part of everyday life. Most people around me weren't talking about software, startups, or computers. </p>
+    <div style="margin: 20px 0; text-align: center;">
+    <img
+      src="/naruto_sitting.jfif"
+      alt="Remote village"
+      style="max-width: 100%; border-radius: 10px;"
+    />
+  </div>
+  
+   <p> My early curiosity came from somewhere else entirely. Movies like Iron Man, Transformers, and Christopher Nolan films made me wonder how people built things that felt bigger than reality. I didn't know it then, but those stories planted the first seeds of curiosity. </p>
+  <p> When I got access to my first computer in school, it started like it does for many kids: GTA San Andreas, NFS, IGI, and countless hours of gaming. </p> <p> But over time, something changed. I became less interested in the games themselves and more interested in the machine running them. I wanted to understand how things worked beneath the surface. </p> <p> After school, I followed what seemed like the sensible path and started preparing for government exams. Stability felt important, and for a while, that was the direction I thought my life would take. </p> <p> Then COVID happened. </p> <p> Like many people, I suddenly had more time to think. I found myself returning to computers again and again. The curiosity I had ignored for years refused to go away. </p>
+  <p> Engineering wasn't an option for me at the time, so I joined a BSc in Computer Science while continuing my exam preparation. </p> <p> For a while, I tried to balance both worlds. Eventually, I had to be honest with myself. I wanted more than stability. I wanted growth. I wanted to build things. </p> <p> After graduation, I received an offer through a major consulting firm in India. On paper, life seemed to be moving in the right direction. </p>
 
   <p>
-    I got my first computer in school. It started with games like GTA San Andreas, NFS, IGI, but over time I became more interested in how the machine worked than just using it.
-  </p>
-
-  <p>
-    After school, I initially followed a conventional path and prepared for government exams. I completed 12th, but things changed during COVID, when I started revisiting my interest in computers more seriously.
-  </p>
-
-  <p>
-    Since I couldn’t take engineering at that time, I joined a BSc in Computer Science while continuing exam prep. Eventually, I realized I wanted more than stability,I wanted growth and the ability to build.
-  </p>
-
-  <p>
-    After graduation, I received an offer through a major service consulting firm in India, but before joining full-time, I explored tech communities like Discord, open-source spaces, and builder communities like
+    but before joining full-time, I explored tech communities like Discord, open-source spaces, and builder communities like
     <a href="https://buildspace.so/" target="_blank">buildspace</a>.
   </p>
 
