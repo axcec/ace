@@ -3,7 +3,6 @@ title: "LLM Inference Deep Dive — KV Cache, Batching, Memory, Latency & Cost"
 date: 2026-08-16
 ---
 
-# LLM Inference Deep Dive — KV Cache, Batching, Memory, Latency & Cost
 
 Running an LLM in production is not simply a matter of loading a model onto a GPU and calling `generate()`.
 
